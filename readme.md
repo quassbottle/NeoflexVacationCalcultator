@@ -1,5 +1,5 @@
 # Neoflex Vacation Calculator
-Vacation pay calculator service as an entry task for NeoflexStudy.
+Simple Springboot vacation pay calculator as an entry task for NeoflexStudy.
 ## Endpoints
 ###### Url
 ```
