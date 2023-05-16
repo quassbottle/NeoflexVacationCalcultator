@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 import java.time.LocalDate;
 
-@FeignClient(name = "IsDayOffService", url  = "https://www.isdayoff.ru/")
+@FeignClient(name = "IsDayOffService", url  = "https://isdayoff.ru/")
 public interface IsDayOffFeignClient {
     @GetMapping("/{date}")
     String getDayOff(@DateTimeFormat(pattern = "yyyy-MM-dd") @PathVariable LocalDate date);
