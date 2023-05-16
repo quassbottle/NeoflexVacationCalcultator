@@ -10,5 +10,5 @@ import java.time.LocalDate;
 @FeignClient(name = "IsDayOffService", url  = "https://www.isdayoff.ru/")
 public interface IsDayOffFeignClient {
     @GetMapping("/{date}")
-    String getDayOff(@DateTimeFormat(pattern = "yyyymmdd") @PathVariable LocalDate date);
+    String getDayOff(@DateTimeFormat(pattern = "yyyy-MM-dd") @PathVariable LocalDate date);
 }

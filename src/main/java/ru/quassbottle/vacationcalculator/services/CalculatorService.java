@@ -10,7 +10,7 @@ import java.time.LocalDate;
 
 @Service
 public class CalculatorService {
-    private final float AVERAGE_MONTH_LENGTH = 29.3f;
+    private static final float AVERAGE_MONTH_LENGTH = 29.3f;
     private final IsDayOffFeignClient _isDayOffFeignClient;
 
     @Autowired
@@ -22,8 +22,26 @@ public class CalculatorService {
         if (averageSalary <= 0 || days <= 0)
             throw new IllegalArgumentException();
         if (startDate == null) {
-            return new VacationPayment(averageSalary, days, averageSalary / AVERAGE_MONTH_LENGTH * days);
+            return new VacationPayment(calculateVacationSalary(averageSalary, days));
         }
-        return null;
+
+        int paidDaysCount = days;
+        for (int i = 0; i < days; i++) {
+            if (isDayOff(startDate.plusDays(i)))
+                paidDaysCount--;
+        }
+
+        return new VacationPayment(calculateVacationSalary(averageSalary, paidDaysCount));
+    }
+
+    private float calculateVacationSalary(float averageSalary, int days) {
+        return averageSalary / AVERAGE_MONTH_LENGTH * days;
+    }
+
+    private boolean isDayOff(LocalDate date) {
+        return _isDayOffFeignClient.getDayOff(date).equals("1") ||
+                (date.getDayOfWeek().toString().equals("SATURDAY") &&
+                date.getDayOfWeek().toString().equals("SUNDAY"));
+
     }
 }

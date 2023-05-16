@@ -24,7 +24,7 @@ public class CalculatorController {
     @GetMapping("/calculate")
     public ResponseEntity<VacationPayment> getVacationPayment(@RequestParam(value = "averageSalary") float averageSalary,
                                                               @RequestParam(value = "vacationLength") int vacationLength,
-                                                              @RequestParam(value = "startDate", required = false) @DateTimeFormat(pattern = "yyyymmdd") LocalDate startDate) {
+                                                              @RequestParam(value = "startDate", required = false) @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate startDate) {
         try {
             return new ResponseEntity<>(_service.getVacationPayment(averageSalary, vacationLength, startDate), HttpStatus.OK);
         } catch(IllegalArgumentException e) {
