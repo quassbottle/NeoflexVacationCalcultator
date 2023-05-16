@@ -22,7 +22,7 @@ public class CalculatorController {
     }
 
     @GetMapping("/calculate")
-    public ResponseEntity<VacationPayment> getVacationPayment(@RequestParam(value = "averageSalary") float averageSalary,
+    public ResponseEntity<VacationPayment> getVacationPayment(@RequestParam(value = "salary") float averageSalary,
                                                               @RequestParam(value = "days") int days,
                                                               @RequestParam(value = "startDate", required = false) @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate startDate) {
         try {
